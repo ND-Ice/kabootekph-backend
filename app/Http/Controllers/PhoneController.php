@@ -10,13 +10,18 @@ class PhoneController extends Controller
 {
     public function create(Request $request)
     {
-        $phone = new Phones();
-        $request->validate([
-            'phone' => 'required',
-        ]);
-        $phone->phone = $request->phone;
-        $phone->save();
-        return response()->json($phone);
+        $isExist =  Phones::where('phone', $request->phone)->get();
+        if (count($isExist) == 1) {
+            return response()->json("already exists", 404);
+        } else {
+            $phone = new Phones();
+            $request->validate([
+                'phone' => 'required',
+            ]);
+            $phone->phone = $request->phone;
+            $phone->save();
+            return response()->json($phone);
+        }
     }
 
 
@@ -32,7 +37,7 @@ class PhoneController extends Controller
         $phone = Phones::findOrFail($id);
         $phone->phone = $request->phone;
         $phone->save();
-        return response()->json(phone);
+        return response()->json($phone);
     }
 
 

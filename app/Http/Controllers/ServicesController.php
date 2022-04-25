@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\File;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,7 @@ class ServiceCrudController extends Controller
         $service->description = $request->description;
         $service->image = $request->image;
         $service->save();
-        return response()->json(['Created Successfully!' => true]);
+        return response()->json($service);
     }
 
 
@@ -39,15 +38,14 @@ class ServiceCrudController extends Controller
         $service->description = $request->description;
         $service->image = $request->image;
         $service->save();
-        return response()->json(['Updated Successfully!' => true]);
+        return response()->json($service);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////
 
     public function destroy($id)
     {
         $service = Services::find($id);
         $service->delete();
-        return response()->json(['Message' => 'Deleted Successfully!'], 200);
+        return response()->json($service);
     }
 }

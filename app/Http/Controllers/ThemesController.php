@@ -51,4 +51,11 @@ class ThemeController extends Controller
         $theme->delete();
         return response()->json($theme);
     }
+
+    public function activate($id)
+    {
+        $theme = Themes::find($id);
+        $theme->delete();
+        return response()->json($theme);
+    }
 }

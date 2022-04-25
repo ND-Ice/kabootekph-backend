@@ -18,7 +18,7 @@ class AboutController extends Controller
         $about->description = $request->description;
         $about->image = $request->image;
         $about->save();
-        return response()->json(['Created Successfully!' => true]);
+        return response()->json($about);
     }
 
 
@@ -35,7 +35,7 @@ class AboutController extends Controller
         $about->about_description = $request->about_description;
         $about->about_image = $request->about_image;
         $about->save();
-        return response()->json(['Updated Successfully!' => true]);
+        return response()->json($about);
     }
 
 
@@ -43,6 +43,6 @@ class AboutController extends Controller
     {
         $about = About::find($id);
         $about->delete();
-        return response()->json(['Message' => 'Deleted Successfully!'], 200);
+        return response()->json($about);
     }
 }
